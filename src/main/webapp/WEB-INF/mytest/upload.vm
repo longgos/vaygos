@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="/index/include/taglib.jsp"%>
+<html>
+<head>
+<link rel="stylesheet" href="${ctxStatic}/webuploader/webuploader.css">
+<link rel="stylesheet" href="${ctxStatic}/css/style.css">
+<title>Insert title here</title>
+<style type="text/css">
+/* 	.wu-example{height: 150px;} */
+/* 	.uploder_list{height: 100px;} */
+/* 	#btns{height: 100px;} */
+/* 	#attach{height: 30px;} */
+/* 	#uploder{height: 30px;width: 50px;} */
+.cl{
+	width: 100px;
+	height: 100px;
+	cursor:url(${ctxStatic}/images/big.cur),auto;
+}
+ .demo{width:580px;margin:30px auto;padding:10px 20px}
+.demo h3{line-height:40px; font-weight: bold;}
+.file-item{float: left; position: relative; width: 110px;height: 110px; margin: 0 20px 20px 0; padding: 4px;}
+.file-item .info{overflow: hidden;}
+.uploader-list{width: 100%; overflow: hidden;}
+</style>
+</head>
+<body>
+	<div id="uploader" class="wu-example">
+		<!-- 鐢ㄦ潵瀛樻斁鏂囦欢淇℃伅 -->
+		<div class="demo">
+			<div id="uploader">
+				<div class="queueList">
+					<div id="filePicker" class="placeholder">
+						<p class="sead">娣诲姞涓�寮犲浘鐗�</p>
+					</div>
+				</div>
+				<div class="statusBar" >
+				<div class="goon"><span></span>缁х画娣诲姞</div>
+					<!-- <div class="progress">
+						<span class="text">0%</span> <span class="percentage"></span>
+					</div>
+					<div class="info"></div>
+					<div class="btns">
+						<div id="filePicker2"></div>
+						<div class="uploadBtn">寮�濮嬩笂浼�</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+<script type="text/javascript" src="${ctxStatic}/js/jquery.1.8.3.min.js"></script>
+<script type="text/javascript" src="${ctxStatic}/webuploader/webuploader.min.js"></script>
+<script type="text/javascript" src="${ctxStatic}/js/upload.js"></script>
+<script type="text/javascript">
+/* http://demo.qingcms.com/ */
+/* 缃戠珯妯℃澘锛歨ttp://www.qifeiye.com/ */
+ /* http://news.ifeng.com/photo/yizhousaojietu/detail_2011_12/25/11555699_0.shtml */
+ /* 鎻掍欢闆嗭細http://www.cnblogs.com/lhb25/archive/2011/04/11/2005330.html
+         澶у浘鎻掍欢锛歨ttp://www.yyyweb.com/demo/fancybox/ 
+ 		 http://www.yyyweb.com/demo/lightbox/
+ */
+	$(function(){
+
+		//涓婁紶鍥剧墖
+		 // 鍒濆鍖朩eb Uploader
+		var uploader = WebUploader.create({
+
+		    // 閫夊畬鏂囦欢鍚庯紝鏄惁鑷姩涓婁紶銆�
+		    auto: true,
+
+		    // swf鏂囦欢璺緞
+		    swf: '${ctxStatic}/webuploader/Uploader.swf',
+		    // 鏂囦欢鎺ユ敹鏈嶅姟绔��
+		    server: 'upload.php',
+
+		    // 閫夋嫨鏂囦欢鐨勬寜閽�傚彲閫夈��
+		    // 鍐呴儴鏍规嵁褰撳墠杩愯鏄垱寤猴紝鍙兘鏄痠nput鍏冪礌锛屼篃鍙兘鏄痜lash.
+		    pick: '#imgPicker',
+
+		    // 鍙厑璁搁�夋嫨鍥剧墖鏂囦欢銆�
+		    accept: {
+		        title: 'Images',
+		        extensions: 'gif,jpg,jpeg,bmp,png',
+		        mimeTypes: 'image/*'
+		    }
+		});
+
+		// 褰撴湁鏂囦欢娣诲姞杩涙潵鐨勬椂鍊�
+		uploader.on( 'fileQueued', function( file ) {
+		    var $list = $("#fileList"),
+		        $li = $(
+		            '<div id="' + file.id + '" class="file-item thumbnail">' +
+		                '<img>' +
+		                '<div class="info">' + file.name + '</div>' +
+		            '</div>'
+		            ),
+		        $img = $li.find('img');
+
+
+		    // $list涓哄鍣╦Query瀹炰緥
+		    $list.append( $li );
+
+		    // 鍒涘缓缂╃暐鍥�
+		    // 濡傛灉涓洪潪鍥剧墖鏂囦欢锛屽彲浠ヤ笉鐢ㄨ皟鐢ㄦ鏂规硶銆�
+		    // thumbnailWidth x thumbnailHeight 涓� 100 x 100
+		    uploader.makeThumb( file, function( error, src ) {
+		        if ( error ) {
+		            $img.replaceWith('<span>涓嶈兘棰勮</span>');
+		            return;
+		        }
+
+		        $img.attr( 'src', src );
+		    }, 100, 100 );
+		});
+		// 鏂囦欢涓婁紶杩囩▼涓垱寤鸿繘搴︽潯瀹炴椂鏄剧ず銆�
+		uploader.on( 'uploadProgress', function( file, percentage ) {
+		    var $li = $( '#'+file.id ),
+		        $percent = $li.find('.progress span');
+
+		    // 閬垮厤閲嶅鍒涘缓
+		    if ( !$percent.length ) {
+		        $percent = $('<p class="progress"><span></span></p>')
+		                .appendTo( $li )
+		                .find('span');
+		    }
+
+		    $percent.css( 'width', percentage * 100 + '%' );
+		});
+
+		// 鏂囦欢涓婁紶鎴愬姛锛岀粰item娣诲姞鎴愬姛class, 鐢ㄦ牱寮忔爣璁颁笂浼犳垚鍔熴��
+		uploader.on( 'uploadSuccess', function( file ) {
+		    $( '#'+file.id ).addClass('upload-state-done');
+		});
+
+		// 鏂囦欢涓婁紶澶辫触锛屾樉绀轰笂浼犲嚭閿欍��
+		uploader.on( 'uploadError', function( file ) {
+		    var $li = $( '#'+file.id ),
+		        $error = $li.find('div.error');
+
+		    // 閬垮厤閲嶅鍒涘缓
+		    if ( !$error.length ) {
+		        $error = $('<div class="error"></div>').appendTo( $li );
+		    }
+
+		    $error.text('涓婁紶澶辫触');
+		});
+
+		// 瀹屾垚涓婁紶瀹屼簡锛屾垚鍔熸垨鑰呭け璐ワ紝鍏堝垹闄よ繘搴︽潯銆�
+		uploader.on( 'uploadComplete', function( file ) {
+		    $( '#'+file.id ).find('.progress').remove();
+		});
+
+
+	})
+
+
+
+
+ 
+
+
+</script>
+</html>

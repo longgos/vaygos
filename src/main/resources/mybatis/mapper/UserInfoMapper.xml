@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ways.dao.UserInfoDao">
+    <resultMap type="com.ways.entity.UserInfoEntity" id="VayUserResult">
+    	<result property="userId" column="user_id" />
+    	<result property="rankId" column="rank_id" />
+    	<result property="nickName" column="nick_name" />
+    	<result property="userImg" column="user_img" />
+    	<result property="userName" column="user_name" />
+    	<result property="age" column="age" />
+    	<result property="idCard" column="id_card" />
+    	<result property="email" column="email" />
+    	<result property="phone" column="phone" />
+    	<result property="birthDay" column="birth_day" />
+    	<result property="address" column="address" />
+    	<result property="loginName" column="login_name" />
+    	<result property="loginPassword" column="login_password" />
+    	<result property="createBy" column="create_by" />
+    	<result property="createDate" column="create_date" />
+    	<result property="updateBy" column="update_by" />
+    	<result property="updateDate" column="update_date" />
+    </resultMap>
+	<sql id="vayUserColumns">
+		a.user_id,
+		a.rank_id,
+		a.nick_name,
+		a.user_img,
+		a.user_name,
+		a.age,
+		a.id_card,
+		a.email,
+		a.phone,
+		a.birth_day,
+		a.address,
+		a.login_name,
+		a.login_password,
+		a.create_by,
+		a.create_date,
+		a.update_by,
+		a.update_date
+	</sql>
+	
+	<sql id="vayUserJoins">
+		LEFT JOIN sys_user u1 ON u1.id = a.user_id
+	</sql>
+    
+	<select id="get" resultMap="VayUserResult">
+		SELECT 
+			<include refid="vayUserColumns"/>
+		FROM vay_user a
+		<where>
+			
+			<if test="userId != null and userId != ''">
+				AND user_id = #{userId}
+			</if>
+			<if test="nickName !=null and nickName !=''">
+				AND nick_name = #{nickName}
+			</if>
+			<if test="email != null and email != ''">
+				AND email = #{email}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultMap="VayUserResult">
+		SELECT 
+			<include refid="vayUserColumns"/>
+		FROM vay_user a
+		<include refid="vayUserJoins"/>
+		<where>
+			
+		</where>
+		
+		ORDER BY a.create_date DESC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO vay_user(
+			user_id,
+			rank_id,
+			nick_name,
+			user_img,
+			user_name,
+			age,
+			id_card,
+			email,
+			phone,
+			birth_day,
+			address,
+			login_name,
+			login_password,
+			create_by,
+			create_date,
+			update_by,
+			update_date
+		) VALUES (
+			#{userId},
+			#{rankId},
+			#{nickName},
+			#{userImg},
+			#{userName},
+			#{age},
+			#{idCard},
+			#{email},
+			#{phone},
+			#{birthDay},
+			#{address},
+			#{loginName},
+			#{loginPassword},
+			#{createBy},
+			#{createDate},
+			#{updateBy},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE vay_user 	
+		<set>	
+			<if test="null != userId">		
+			user_id = #{userId},
+			</if>
+			<if test="null != rankId">		
+			rank_id = #{rankId},
+			</if>
+			<if test="null != nickName">		
+			nick_name = #{nickName},
+			</if>
+			<if test="null != userImg">		
+			user_img = #{userImg},
+			</if>
+			<if test="null != userName">		
+			user_name = #{userName},
+			</if>
+			<if test="null != age">		
+			age = #{age},
+			</if>
+			<if test="null != idCard">		
+			id_card = #{idCard},
+			</if>
+			<if test="null != email">		
+			email = #{email},
+			</if>
+			<if test="null != phone">		
+			phone = #{phone},
+			</if>
+			<if test="null != birthDay">		
+			birth_day = #{birthDay},
+			</if>
+			<if test="null != address">		
+			address = #{address},
+			</if>
+			<if test="null != loginName">		
+			login_name = #{loginName},
+			</if>
+			<if test="null != loginPassword">		
+			login_password = #{loginPassword},
+			</if>
+			<if test="null != updateBy">		
+			update_by = #{updateBy},
+			</if>
+			<if test="null != updateDate">		
+			update_date = #{updateDate},
+			</if>
+
+	</set>
+		WHERE user_id = #{userId}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM vay_user
+		WHERE use_id = #{useId}
+	</update>
+	
+</mapper>

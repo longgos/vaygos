@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ways.dao.UserBlogDao">
+    <resultMap type="VayBlogEntity" id="VayBlogResult">
+    	<result property="blogId" column="blog_id" />
+    	<result property="userId" column="user_id" />
+    	<result property="blogTermId" column="blog_term_id" />
+    	<result property="contents" column="contents" />
+    	<result property="blogType" column="blog_type" />
+    	<result property="zanCount" column="zan_count" />
+    	<result property="commentCount" column="comment_count" />
+    	<result property="isUp" column="is_up" />
+    	<result property="createdBy" column="created_by" />
+    	<result property="createdDate" column="created_date" />
+    	<result property="updatedBy" column="updated_by" />
+    	<result property="updatedDate" column="updated_date" />
+    </resultMap>
+	<sql id="vayBlogColumns">
+		a.blog_id,
+		a.user_id,
+		a.blog_term_id,
+		a.contents,
+		a.blog_type,
+		a.zan_count,
+		a.comment_count,
+		a.is_up,
+		a.created_by,
+		a.created_date,
+		a.updated_by,
+		a.updated_date
+	</sql>
+	
+	<sql id="vayBlogJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+	</sql>
+    
+	<select id="get" resultMap="VayBlogResult">
+		SELECT 
+			<include refid="vayBlogColumns"/>
+		FROM vay_blog a
+		<include refid="vayBlogJoins"/>
+		<where>
+			
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultMap="VayBlogResult">
+		SELECT 
+			<include refid="vayBlogColumns"/>
+		FROM vay_blog a
+		<include refid="vayBlogJoins"/>
+		<where>
+			
+		</where>
+		
+		ORDER BY a.id DESC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO vay_blog(
+			blog_id,
+			user_id,
+			blog_term_id,
+			contents,
+			blog_type,
+			zan_count,
+			comment_count,
+			is_up,
+			created_by,
+			created_date,
+			updated_by,
+			updated_date
+		) VALUES (
+			#{blogId},
+			#{userId},
+			#{blogTermId},
+			#{contents},
+			#{blogType},
+			#{zanCount},
+			#{commentCount},
+			#{isUp},
+			#{createdBy},
+			#{createdDate},
+			#{updatedBy},
+			#{updatedDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE vay_blog 	
+		<set>	
+			<if test="null != blogId">		
+			blog_id = #{blogId},
+			</if>
+			<if test="null != userId">		
+			user_id = #{userId},
+			</if>
+			<if test="null != blogTermId">		
+			blog_term_id = #{blogTermId},
+			</if>
+			<if test="null != contents">		
+			contents = #{contents},
+			</if>
+			<if test="null != blogType">		
+			blog_type = #{blogType},
+			</if>
+			<if test="null != zanCount">		
+			zan_count = #{zanCount},
+			</if>
+			<if test="null != commentCount">		
+			comment_count = #{commentCount},
+			</if>
+			<if test="null != isUp">		
+			is_up = #{isUp},
+			</if>
+			<if test="null != createdBy">		
+			created_by = #{createdBy},
+			</if>
+			<if test="null != createdDate">		
+			created_date = #{createdDate},
+			</if>
+			<if test="null != updatedBy">		
+			updated_by = #{updatedBy},
+			</if>
+			<if test="null != updatedDate">		
+			updated_date = #{updatedDate},
+			</if>
+
+	</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM vay_blog
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

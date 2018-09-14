@@ -1,0 +1,83 @@
+.vay-nav {
+	width: 100%;
+	height: 27px;
+	background-color: #2d2c2b;
+	z-index: 101;
+	position: absolute;
+}
+
+.contailer {
+	width: 990px;
+	height: 27px;
+	margin: 0 auto;
+	font: 12px/1.5 tahoma, arial, "Hiragino Sans GB", \5b8b\4f53;
+	color: #fff;
+}
+
+.contailer-left {
+	float: left;
+}
+
+.contailer-right {
+	float: right;
+}
+
+.contailer-left-welcome {
+	float: left;
+}
+
+ul {
+	margin: 0;
+	height: 26px;
+}
+
+li {
+	list-style: none;
+}
+
+.vay-item {
+	line-height: 26px;
+	padding: 0 7px;
+	height: 27px;
+}
+.vay-item-right{
+	float: left;
+	line-height: 26px;
+	padding: 0 7px;
+	height: 27px;
+}
+.vertical{}
+.nickname {
+	color: #fff;
+	cursor: pointer;
+}
+
+.nickname:visited {
+	TEXT-DECORATION: none
+}
+
+.nickname:hover {
+	TEXT-DECORATION: underline
+}
+
+.nickname:link {
+	TEXT-DECORATION: none
+}
+
+.link{color: #fff;
+	cursor: pointer;
+}
+	
+.link:visited {
+	TEXT-DECORATION: none
+}
+
+.link:hover {
+	TEXT-DECORATION: underline;
+	color: #00bbee;
+}
+
+.link:link {
+	TEXT-DECORATION: none;
+	color: #fff;
+}	

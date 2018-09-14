@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzr.bfw.dao.VayUserDao">
+    <resultMap type="VayUserEntity" id="VayUserResult">
+    	<result property="useId" column="user_id" />
+    	<result property="rankId" column="rank_id" />
+    	<result property="nickName" column="nick_name" />
+    	<result property="userImg" column="user_img" />
+    	<result property="username" column="username" />
+    	<result property="age" column="age" />
+    	<result property="idCard" column="id_card" />
+    	<result property="phone" column="phone" />
+    	<result property="birthDay" column="birth_day" />
+    	<result property="address" column="address" />
+    	<result property="loginName" column="login_name" />
+    	<result property="loginPassword" column="login_password" />
+    	<result property="createBy" column="create_by" />
+    	<result property="createDate" column="create_date" />
+    	<result property="updateBy" column="update_by" />
+    	<result property="updateDate" column="update_date" />
+    </resultMap>
+	<sql id="vayUserColumns">
+		a.user_id,
+		a.rank_id,
+		a.nick_name,
+		a.user_img,
+		a.username,
+		a.age,
+		a.id_card,
+		a.phone,
+		a.birth_day,
+		a.address,
+		a.login_name,
+		a.login_password,
+		a.create_by,
+		a.create_date,
+		a.update_by,
+		a.update_date
+	</sql>
+	
+	<sql id="vayUserJoins">
+		LEFT JOIN sys_user u1 ON u1.id = a.user_id
+	</sql>
+    
+	<select id="get" resultMap="VayUserResult">
+		SELECT 
+			<include refid="vayUserColumns"/>
+		FROM vay_user a
+		<include refid="vayUserJoins"/>
+		<where>
+			
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findList" resultMap="VayUserResult">
+		SELECT 
+			<include refid="vayUserColumns"/>
+		FROM vay_user a
+		<include refid="vayUserJoins"/>
+		<where>
+			
+		</where>
+		
+		ORDER BY a.create_date DESC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO vay_user(
+			user_id,
+			rank_id,
+			nick_name,
+			user_img,
+			username,
+			age,
+			id_card,
+			phone,
+			birth_day,
+			address,
+			login_name,
+			login_password,
+			create_by,
+			create_date,
+			update_by,
+			update_date
+		) VALUES (
+			#{useId},
+			#{rankId},
+			#{nickName},
+			#{userImg},
+			#{username},
+			#{age},
+			#{idCard},
+			#{phone},
+			#{birthDay},
+			#{address},
+			#{loginName},
+			#{loginPassword},
+			#{createBy},
+			#{createDate},
+			#{updateBy},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE vay_user 	
+		<set>	
+			<if test="null != useId">		
+			user_id = #{useId},
+			</if>
+			<if test="null != rankId">		
+			rank_id = #{rankId},
+			</if>
+			<if test="null != nickName">		
+			nick_name = #{nickName},
+			</if>
+			<if test="null != userImg">		
+			user_img = #{userImg},
+			</if>
+			<if test="null != username">		
+			username = #{username},
+			</if>
+			<if test="null != age">		
+			age = #{age},
+			</if>
+			<if test="null != idCard">		
+			id_card = #{idCard},
+			</if>
+			<if test="null != phone">		
+			phone = #{phone},
+			</if>
+			<if test="null != birthDay">		
+			birth_day = #{birthDay},
+			</if>
+			<if test="null != address">		
+			address = #{address},
+			</if>
+			<if test="null != loginName">		
+			login_name = #{loginName},
+			</if>
+			<if test="null != loginPassword">		
+			login_password = #{loginPassword},
+			</if>
+			<if test="null != updateBy">		
+			update_by = #{updateBy},
+			</if>
+			<if test="null != updateDate">		
+			update_date = #{updateDate},
+			</if>
+
+	</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM vay_user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

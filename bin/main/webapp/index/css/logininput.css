@@ -1,0 +1,133 @@
+
+.login-input{
+    width: 350px;
+    height: 300px;
+    z-index: 100;
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    overflow: auto;
+    background :rgba(0,0,0,0.5);
+    
+}
+.login-text{
+    width: 350px;
+    height: 50px;
+    color: #fff;
+    padding: 15px;
+    font-weight: 700;
+    box-sizing: border-box;
+    z-index: 100;
+}
+.login-two{
+    width: 350px;
+    height: 248px;
+    float: right;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.the-user{
+    width: 320px;
+    height: 45px;
+    position: relative;
+    background-color: #fff;
+    opacity:1;
+}
+.img-user{
+    width: 50px;
+    height: 45px;
+    float: left;
+}
+.input-user{
+    width: 240px;
+    height: 45px;
+    padding: 9px;  
+    box-sizing: border-box;
+    border:0;
+    outline:none;
+}
+
+.the-pasd{
+    width: 320px;
+    height: 45px;
+    margin-top: 20px;
+    position: relative;
+    background-color: #fff;
+    op
+}
+.img-pas{
+    width: 50px;
+    height: 45px;
+    background-color: aqua;
+    float: left;
+}
+.input-password{
+    width: 240px;
+    height: 45px;
+    padding: 9px;
+    box-sizing: border-box;
+    border:0;
+    outline:none;
+}
+
+.user_buttion{
+    color: #fff;
+    text-align: center;
+    height: 40px;
+    width: 280px;
+    border-radius: 4px;
+    background-color: #2274b1;
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 25px;
+    font-family: "Microsoft Yahei","微软雅黑",SimHei,"黑体","Hiragino Sans GB",STHeiTi,sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+}
+.colse{
+    width: 20px;
+    height: 20px;
+    background-color: #ababab;
+    position: absolute;
+    top: 12.5px;
+    right: 10px;
+    border-radius: 50%;
+}
+.cha-left{
+    width: 10px;
+    border: 1px solid #fff;
+    transform:rotate(45deg);
+    position: absolute;
+    top: 9px;
+    left: 4px;
+}
+.cha-right{
+    width: 10px;
+    border: 1px solid #fff;
+    transform:rotate(-45deg);
+    position: absolute;
+    top: 9px;
+    left: 4px;
+}
+.colse-user{
+	
+}
+.user-ind{
+	color: #fff;
+	font-family: helvetica,arial,微软雅黑,华文黑体;
+    font-size: 14px;
+	text-align: right;
+	margin-top: 15px;
+}
+.user-ind #registe{
+	color: #fff;
+	text-decoration: none;
+}
+.user-ind #forget{
+	text-decoration: none;
+	color: #1192fb;
+}
+.user-barrier{
+	padding : 0 7px;
+}

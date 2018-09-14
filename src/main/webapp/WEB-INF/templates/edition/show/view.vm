@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<ul>
+		#foreach(${th} in ${list})
+		<li>${th}</li>
+		#end
+	</ul>
+	
+</body>
+</script>
+</html>

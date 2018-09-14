@@ -1,0 +1,51 @@
+body {
+	margin: 0;
+}
+
+.ck-slide {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.ck-slide ul {
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0 auto;
+}
+
+.ck-slide-wrapper li {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+}
+
+
+.ck-slide ul.ck-slide-wrapper {
+	height: 320px;
+}
+
+.back-mid {
+	width: 120px;
+	height: 395px;
+	z-index: 100;
+	position: absolute;
+	top: 20%;
+	right: 25%;
+}
+
+.bak1 {
+	background-image: url("/index/images/faus.jpeg");
+}
+.bak2 {
+	background-image: url("/index/images/corner.jpg");
+}
+.bak3 {
+	background-image: url("$/index/images/43.jpg");
+}
+.bak4 {
+	background-image: url("$/index/images/train-road.jpg");
+}
